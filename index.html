@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaruthiJewellers - Exquisite Modern Jewelry</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&family=Montserrat:wght@300;400;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .hero-parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Improved mobile menu styles */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            z-index: 100;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .menu-item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #333;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover::after {
+            transform: translateX(0);
+        }
+
+        /* Improved card styles */
+        .card {
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Glassmorphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="fixed w-full bg-white bg-opacity-90 z-50 shadow-md">
+        <nav class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-gray-800">MaruthiJewellers</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="menu-item text-gray-600 hover:text-gray-900 transition duration-300">Home</a>
+                    <a href="#collections" class="menu-item text-gray-600 hover:text-gray-900 transition duration-300">Collections</a>
+                    <a href="#custom-design" class="menu-item text-gray-600 hover:text-gray-900 transition duration-300">Custom Design</a>
+                    <a href="#about" class="menu-item text-gray-600 hover:text-gray-900 transition duration-300">About</a>
+                    <a href="#testimonials" class="menu-item text-gray-600 hover:text-gray-900 transition duration-300">Testimonials</a>
+                    <a href="#contact" class="menu-item text-gray-600 hover:text-gray-900 transition duration-300">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-gray-900"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></a>
+                    <a href="#" class="text-gray-600 hover:text-gray-900"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg></a>
+                    <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Improved Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu items-center justify-center">
+        <div class="text-center">
+            <a href="#home" class="block text-gray-800 text-xl mb-6 hover:text-gray-600 transition duration-300">Home</a>
+            <a href="#collections" class="block text-gray-800 text-xl mb-6 hover:text-gray-600 transition duration-300">Collections</a>
+            <a href="#custom-design" class="block text-gray-800 text-xl mb-6 hover:text-gray-600 transition duration-300">Custom Design</a>
+            <a href="#about" class="block text-gray-800 text-xl mb-6 hover:text-gray-600 transition duration-300">About</a>
+            <a href="#testimonials" class="block text-gray-800 text-xl mb-6 hover:text-gray-600 transition duration-300">Testimonials</a>
+            <a href="#contact" class="block text-gray-800 text-xl mb-6 hover:text-gray-600 transition duration-300">Contact</a>
+        </div>
+    </div>
+
+    <main>
+        <section id="home" class="hero-parallax h-screen flex items-center justify-center" style="background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');">
+            <div class="text-center text-white px-4 glass p-8 rounded-lg">
+                <h1 class="text-4xl md:text-7xl font-light mb-4" data-aos="fade-up">Timeless Elegance</h1>
+                <p class="text-xl md:text-2xl mb-8" data-aos="fade-up" data-aos-delay="200">Discover our exquisite collection</p>
+                <a href="#collections" class="bg-white text-gray-900 px-8 py-3 rounded-full hover:bg-gray-200 transition duration-300" data-aos="fade-up" data-aos-delay="400">Explore Now</a>
+            </div>
+        </section>
+
+        <section id="collections" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-light text-center mb-12" data-aos="fade-up">Our Collections</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="group card" data-aos="fade-up">
+                        <div class="relative overflow-hidden rounded-lg">
+                            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Gold Collection" class="w-full h-64 md:h-96 object-cover transition duration-300 transform group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                                <a href="#" class="text-white border border-white px-6 py-2 hover:bg-white hover:text-black transition duration-300">View Collection</a>
+                            </div>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-light mt-4">Gold Elegance</h3>
+                    </div>
+                    <div class="group card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="relative overflow-hidden rounded-lg">
+                            <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Silver Collection" class="w-full h-64 md:h-96 object-cover transition duration-300 transform group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                                <a href="#" class="text-white border border-white px-6 py-2 hover:bg-white hover:text-black transition duration-300">View Collection</a>
+                            </div>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-light mt-4">Silver Radiance</h3>
+                    </div>
+                    <div class="group card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="relative overflow-hidden rounded-lg">
+                            <img src="https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Diamond Collection" class="w-full h-64 md:h-96 object-cover transition duration-300 transform group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                                <a href="#" class="text-white border border-white px-6 py-2 hover:bg-white hover:text-black transition duration-300">View Collection</a>
+                            </div>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-light mt-4">Diamond Brilliance</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="custom-design" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0" data-aos="fade-right">
+                        <img src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Custom Design" class="w-full h-auto rounded-lg shadow-lg">
+                    </div>
+                    <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
+                        <h2 class="text-3xl md:text-4xl font-light mb-6">Custom Design Service</h2>
+                        <p class="text-gray-600 mb-6">Create a unique piece of jewelry that reflects your personal style with our custom design service. From concept to creation, our skilled artisans will work closely with you to craft a one-of-a-kind masterpiece.</p>
+                        <a href="#" class="bg-gray-900 text-white px-8 py-3 rounded-full hover:bg-gray-700 transition duration-300">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0" data-aos="fade-right">
+                        <h2 class="text-3xl md:text-4xl font-light mb-6">About Us</h2>
+                        <p class="text-gray-600 mb-6">At MaruthiJewellers, we are passionate about creating jewelry that embodies timeless elegance and modern sophistication. Our collections are designed with the utmost care, ensuring each piece is a work of art.</p>
+                        <p class="text-gray-600 mb-6">With over 20 years of experience in the industry, we pride ourselves on delivering exceptional quality and service to our valued customers.</p>
+                        <a href="#" class="bg-gray-900 text-white px-8 py-3 rounded-full hover:bg-gray-700 transition duration-300">Learn More</a>
+                    </div>
+                    <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
+                        <img src="https://images.unsplash.com/photo-1598970434795-0c54fe7c0649?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="About Us" class="w-full h-auto rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-light text-center mb-12" data-aos="fade-up">What Our Clients Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg card" data-aos="fade-up">
+                        <div class="flex items-center mb-4">
+                            <img class="w-12 h-12 rounded-full mr-4" src="https://images.unsplash.com/photo-1598970434795-0c54fe7c0649?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Client 1">
+                            <div>
+                                <p class="text-gray-900 font-semibold">Emily Johnson</p>
+                                <p class="text-gray-600 text-sm">New York, USA</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"The custom ring MaruthiJewellers crafted for my engagement was beyond my wildest dreams. The attention to detail and quality is unmatched. I couldn't be happier with their service."</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex items-center mb-4">
+                            <img class="w-12 h-12 rounded-full mr-4" src="https://images.unsplash.com/photo-1573497019381-54a7b2d3b13e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Client 2">
+                            <div>
+                                <p class="text-gray-900 font-semibold">John Smith</p>
+                                <p class="text-gray-600 text-sm">London, UK</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"MaruthiJewellers has a wonderful selection of fine jewelry. The quality is top-notch, and the customer service is excellent. I highly recommend them for any jewelry needs."</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="flex items-center mb-4">
+                            <img class="w-12 h-12 rounded-full mr-4" src="https://images.unsplash.com/photo-1552072092-7f9b8d63efcb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Client 3">
+                            <div>
+                                <p class="text-gray-900 font-semibold">Sofia Martinez</p>
+                                <p class="text-gray-600 text-sm">Sydney, Australia</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"I purchased a beautiful necklace from MaruthiJewellers, and it quickly became my favorite piece. The craftsmanship is outstanding, and I've received countless compliments."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-light text-center mb-12" data-aos="fade-up">Contact Us</h2>
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-1/2 mb-8 md:mb-0" data-aos="fade-right">
+                        <h3 class="text-2xl font-light mb-6">Get in Touch</h3>
+                        <p class="text-gray-600 mb-6">Have a question or need assistance? Our team is here to help. Reach out to us through the contact form or give us a call, and we'll get back to you as soon as possible.</p>
+                        <p class="text-gray-600 mb-6">Email: info@maruthijewellers.com</p>
+                        <p class="text-gray-600 mb-6">Phone: +1 (123) 456-7890</p>
+                        <p class="text-gray-600">Address: 1234 Jewelry Lane, City Name, Country</p>
+                    </div>
+                    <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
+                        <form action="#" method="POST" class="bg-gray-100 p-8 rounded-lg shadow-lg">
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700">Name</label>
+                                <input type="text" id="name" name="name" class="w-full mt-2 p-3 bg-white rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-900" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700">Email</label>
+                                <input type="email" id="email" name="email" class="w-full mt-2 p-3 bg-white rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-900" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="block text-gray-700">Message</label>
+                                <textarea id="message" name="message" class="w-full mt-2 p-3 bg-white rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-900" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition duration-300">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400 py-6 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 MaruthiJewellers. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+
+        // Improved mobile menu functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            document.body.classList.toggle('overflow-hidden');
+        });
+
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.classList.remove('overflow-hidden');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
